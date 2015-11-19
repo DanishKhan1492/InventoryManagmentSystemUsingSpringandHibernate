@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -27,10 +28,10 @@
 
  function populateBillId(obj){
 	    var table;
-	    if(obj.value=='Borrower'){
+	    if(obj.value=='BorrowerBill'){
 	    	table="borrowerbills";
 	    	$("#customerName").prop("readonly", true);
-	    }else if(obj.value=='Customer'){
+	    }else if(obj.value=='CustomerBill'){
 	    	$("#customerName").prop("readonly",false);
 	    	table="customerbills";
 	    }
@@ -55,16 +56,18 @@
 <body>
 	<div id="container">
 		<div id="categoryDetails">
-			<form action="/InventoryManagementAndSalesSystem/insertBillItems" method="post">
+			<c:set var="context" value="${pageContext.request.contextPath}" />
+		
+			<form action="${context}/insertBillItems" method="post">
 				<table>					
 					<tr>
 						<td class="label"><label for="category" class="label">Category Name</label></td>
 						<td>
 							<select id="category" name="itemCategory" id="itemCategory" onchange="populateItems(this)">
 								<option selected="selected">Select Category</option> 
-								<c:forEach var="category" items="${categories}">
-									<option>${category.categoryName}</option>
-								</c:forEach>
+									<c:forEach var="category" items="${categories}">
+										<option>${category.catName}</option>
+									</c:forEach>
 							</select>
 						</td>
 						<td class="label"><label for="itemCategory" class="label" style="color: red;">${validate.errorCategoryName}</label></td>
@@ -83,11 +86,11 @@
 					
 					<tr>
 						<td class="label"><label for="itemQuantity" class="label">Item Quantity</label></td>
-						<td><input type="text" name="itemQuantity" class="input" id="itemQuantity" placeholder="Enter Item Price" value="${items.itemQuantity}"></td>
+						<td><input type="text" name="itemQuantity" class="input" id="itemQuantity" placeholder="Enter Item Price" required="required"></td>
 						<td class="label"><label for="itemQuantity" class="label" style="color: red;">${validate.errorItemQuantity}</label></td>
 					</tr>
 					<tr>
-						<td><a href="/InventoryManagementAndSalesSystem/mainForm" class="button">Home Page</a></td>
+						<td><a href="${context}/mainPage" class="button">Home Page</a></td>
 						<td><input type="submit" value="Submit" class="button"></td>
 					</tr>
 				</table>

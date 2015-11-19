@@ -2,19 +2,22 @@ package app.IMAS.Daos;
 
 import java.util.List;
 
+import app.IMAS.Entities.Price;
 import app.IMAS.Entities.Product;
 
 public interface ProductDao {
-	
+
 	public void addItem(Product additem);
 
 	public List<Product> getAllItems();
 
-	public List<Product> searchItems(String itemName);
+	public Product searchItems(String itemName);
+
+	public List<Product> searchItemsByAnyValue(String itemName);
 
 	public void updateItems(Product updateitems);
 
-	public Product getItemsforupdate(int updateId);
+	public Product getItemsforupdate(String itemName);
 
 	public void deleteItems(int deleteId);
 
@@ -22,5 +25,9 @@ public interface ProductDao {
 
 	public List<String> getItemNames(String categoryName);
 
-	/*public int changePrice(PriceEntity price);*/
+	public void changePrice(Price price);
+
+	public List<Price> getSpecificPrice(String itemName);
+
+	public List<Price> getAllPrice();
 }

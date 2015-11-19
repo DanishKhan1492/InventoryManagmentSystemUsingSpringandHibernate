@@ -19,8 +19,7 @@
 				<table>
 					<tr>
 						<td class="label"><label for="searchItem">Item Name</label></td>
-						<td><input type="text" name="searchItemPrice" class="input" id="searchItemPrice" Placeholder="Enter Item Name for Price Search"></td>
-						<td><label for="searchItem" style="color:red">${validate.msg}</label></td>
+						<td><input type="text" name="itemName" class="input" id="searchItemPrice" Placeholder="Item Name"></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -43,12 +42,11 @@
 						<th>New Price</th>
 						<th>Date</th>
 					</tr>
-				<c:url var="delete" value="/deleteItem"></c:url>
-				<c:url var="update" value="/updateItemPage"></c:url>
+
 				<c:forEach var="price" items="${prices}">
 					<tr>
-						<td>${price.priceChangeId}</td>
-						<td>${price.itemName}</td>
+						<td>${price.priceId}</td>
+						<td>${price.product.itemName}</td>
 						<td>${price.oldPrice}</td>
 						<td>${price.newPrice}</td>
 						<td>${price.date}</td>

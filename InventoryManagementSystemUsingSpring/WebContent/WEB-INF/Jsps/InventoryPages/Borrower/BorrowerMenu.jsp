@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -8,13 +10,14 @@
 </head>
 <body>
 	<div id="container">
+		<c:set var="context" value="${pageContext.request.contextPath}" />
 		<div id="options">
-			<span><a href="/InventoryManagementAndSalesSystem/addBorrowerPage" class="menubutton">Add Borrower</a></span>
-			<span><a href="/InventoryManagementAndSalesSystem/searchBorrowerPage" class="menubutton">Search</a></span>
-			<span><a href="/InventoryManagementAndSalesSystem/payAmountPage" class="menubutton">Pay Amount</a></span>
-			<span><a href="/InventoryManagementAndSalesSystem/showHistoryPage" class="menubutton">Show History</a></span>
-			<span><a href="/InventoryManagementAndSalesSystem/mainForm" class="menubutton">Home Page</a></span>
-			<span><a href="/InventoryManagementAndSalesSystem/logout" class="menubutton">Logout</a></span>
+			<span><a href="${context}/borrowerPage" class="menubutton">Add Borrower</a></span>
+			<span><a href="${context}/searchBorrowerPage" class="menubutton">Search</a></span>
+			<span><a href="${context}/payAmountPage" class="menubutton">Pay Amount</a></span>
+			<span><a href="${context}/showHistoryPage" class="menubutton">Show History</a></span>
+			<span><a href="${context}/mainPage" class="menubutton">Home Page</a></span>
+			<span><a href="${context}/logout" class="menubutton">Logout</a></span>
 		</div>
 	</div>
 </body>

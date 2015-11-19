@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html">
 <html>
 <head>
@@ -12,30 +14,31 @@
 	<div id="Container">
 		<div id="menu"><jsp:include page="BorrowerMenu.jsp"></jsp:include></div>
 		<div id="borrowerContainer">
-			<form action="/InventoryManagementAndSalesSystem/showHistory" method="post">
+			<c:set var="context" value="${pageContext.request.contextPath}" />
+			
+			<form action="${context}/showHistory" method="post">
 				<table>
 					<tr>
-						<td class="label"><label for="borrowerCnic">Borrower CNIC</label></td>
-						<td><input type="text" name="borrowerCnic" class="input" Placeholder="Enter CNIC" ></td>
-						<td class="label"><label for="borrowerCnic" style="color: red;">${validate.errorBorrowerCnic}</label></td>
+						<td><label for="cnic" class="label">Borrower CNIC</label></td>
+						<td><input type="text" name="cnic" class="input" required="required" Placeholder="Enter CNIC" ></td>
 					</tr>
 					<tr>
-						<td class="label"><label for="date">Borrower CNIC</label></td>
-						<td><input type="date" name="date" class="input" ></td>
-						<td class="label"><label for="date" style="color: red;">${validate.errorDate}</label></td>
+						<td><label for="searchDate" class="label">Date</label></td>
+						<td><input type="date" name="searchDate" class="input" Placeholder="Enter Date" ></td>
 					</tr>
-					<tr>
-						<td></td>
-						<td><input type="submit" Value="Submit" class="button"></td>
-
-					</tr>
+					
 					<tr>
 						<td></td>
-						<td><label class="label" style="color: red;">${msg}</label></td>
-
+						<td><td><input type="submit" Value="Submit" class="button"></td>
 					</tr>
+					
 				</table>
 			</form>
+
+			<div>
+				<h3 style="color:red;">${msg}</h3>
+			</div>
+
 		</div>
 		
 		<div id="borrowerTable">
@@ -54,7 +57,7 @@
 					</tr>
 				<%-- <c:forEach var="borrower" items="${borrower}"> --%>
 					<tr>
-						<td>${borrower.id}</td>
+						<td>${borrower.borrowerId}</td>
 						<td>${borrower.borrowerName}</td>
 						<td>${borrower.cnic}</td>
 						<td>${borrower.address}</td>
@@ -117,14 +120,16 @@
 						<th>Date</th>
 					</tr>
 				<c:forEach var="billsItems" items="${borrowerBillItems}">
-					<tr>
-						<td>${billsItems.billId}</td>
-						<td>${billsItems.itemName}</td>
-						<td>${billsItems.itemQuantity}</td>
-						<td>${billsItems.itemPrice}</td>
-						<td>${billsItems.totalItemPrice}</td>
-						<td>${billsItems.date}</td>
-					</tr>
+					<c:forEach var="billItems" items="${billsItems}">
+							<tr>
+								<td>${billItems.borrowerBill.billId}</td>
+								<td>${billItems.itemName}</td>
+								<td>${billItems.itemQuantity}</td>
+								<td>${billItems.itemPrice}</td>
+								<td>${billItems.totalItemPrice}</td>
+								<td>${billItems.date}</td>
+							</tr>
+						</c:forEach>
 				</c:forEach>
 				</tbody>
 			</table>
@@ -148,8 +153,8 @@
 					</tr>
 				<c:forEach var="amountBorrowed" items="${borrowerAmountBorrowed}">
 					<tr>
-						<td>${amountBorrowed.billId}</td>
-						<td>${amountBorrowed.cnic}</td>
+						<td>${amountBorrowed.billId.billId}</td>
+						<td>${amountBorrowed.cnic.cnic}</td>
 						<td>${amountBorrowed.lastAmount}</td>
 						<td>${amountBorrowed.newAmount}</td>
 						<td>${amountBorrowed.totalAmount}</td>
@@ -179,8 +184,8 @@
 					<tr>
 						<td>${amountPaid.cnic}</td>
 						<td>${amountPaid.lastAmount}</td>
-						<td>${amountPaid.paid}</td>
-						<td>${amountPaid.totalAmount}</td>
+						<td>${amountPaid.paymentAmount}</td>
+						<td>${amountPaid.amountRemaining}</td>
 						<td>${amountPaid.date}</td>
 					</tr>
 				</c:forEach>

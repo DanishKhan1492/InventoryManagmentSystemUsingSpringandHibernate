@@ -10,5 +10,6 @@ public interface CategoryDao {
 	public List<Category> getAllCategories();
 	public List<Category> searchCategory(String catName);
 	public String getCategory(String itemName);
+	public Category getWholeCategory(String categoryName);
 	
 }

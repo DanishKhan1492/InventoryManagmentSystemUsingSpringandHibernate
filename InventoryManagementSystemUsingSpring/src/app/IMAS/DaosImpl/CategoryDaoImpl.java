@@ -1,9 +1,11 @@
 package app.IMAS.DaosImpl;
 
 import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import app.IMAS.Daos.CategoryDao;
 import app.IMAS.Entities.Category;
 
@@ -46,6 +48,13 @@ public class CategoryDaoImpl implements CategoryDao{
 		category=(Category) session.getCurrentSession().createQuery("from Category Where Cat_Name=:name").setString("name", itemName).uniqueResult();
 		String catName=category.getCatName();
 		return catName;
+	}
+
+	@Override
+	public Category getWholeCategory(String categoryName) {
+		Category category=new Category();
+		category=(Category) session.getCurrentSession().createQuery("from Category Where Cat_Name=:name").setString("name", categoryName).uniqueResult();
+		return category;
 	}
 	
 }

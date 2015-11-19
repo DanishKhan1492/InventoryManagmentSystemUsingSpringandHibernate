@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html">
 <html>
 <head>
@@ -12,30 +13,31 @@
 	<div id="Container">
 		<div id="menu"><jsp:include page="BorrowerMenu.jsp"></jsp:include></div>
 		<div id="borrowerContainer">
-			<form action="/InventoryManagementAndSalesSystem/payAmount" method="post">
+			
+			<c:set var="context" value="${pageContext.request.contextPath}" />
+			
+			<form:form action="${context}/payAmount" method="post" commandName="payAmount">
 				<table>
 					<tr>
-						<td class="label"><label for="borrowerCnic">Borrower CNIC</label></td>
-						<td><input type="text" name="borrowerCnic" class="input" Placeholder="Enter CNIC" value="${validate.borrowerCnic}"></td>
-						<td class="label"><label for="borrowerCnic" style="color: red;">${validate.errorBorrowerCnic}</label></td>
+						<td><form:label path="cnic" cssClass="label" >Cnic Number</form:label></td>
+						<td><form:input path="cnic" cssClass="input" placeholder="Enter Cnic"/></td>
+						<td><form:errors path="cnic" cssClass="label" /></td>
 					</tr>
 					<tr>
-						<td class="label"><label for="payAmount">Amount To Pay</label></td>
-						<td><input type="text" name="payAmount" class="input" Placeholder="Enter Amount " ${validate.payAmount}></td>
-						<td class="label"><label for="payAmount" style="color: red;">${validate.errorPayAmount}</label></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><input type="submit" Value="Submit" class="button"></td>
-
+						<td><form:label path="paymentAmount" cssClass="label" >Payment Amount</form:label></td>
+						<td><form:input path="paymentAmount" cssClass="input" placeholder="Enter Payment Amount"/></td>
+						<td><form:errors path="paymentAmount" cssClass="label" /></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td><label class="label" style="color: red;">${msg}</label></td>
-
+						<td><td><input type="submit" Value="Submit" class="button"></td>
 					</tr>
 				</table>
-			</form>
+			</form:form>
+		</div>
+		
+		<div>
+			<p style="color: green;">${msg}</p>
 		</div>
 	</div>
 </body>

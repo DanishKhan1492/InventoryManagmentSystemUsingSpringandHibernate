@@ -17,7 +17,6 @@ public class FieldMatchValidator implements
 		secondFieldName = constraintAnnotation.second();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		boolean toReturn = false;

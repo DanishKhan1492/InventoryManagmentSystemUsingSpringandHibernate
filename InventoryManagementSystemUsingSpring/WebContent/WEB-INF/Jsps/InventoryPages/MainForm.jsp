@@ -13,7 +13,7 @@
 	<div id="container">
 		<div id="options">
 			<span><a href="${context}/stockPage" class="button">Stock</a></span>
-			<span><a href="${context}/borrowerPage" class="button">Borrower</a></span>
+			<span><a href="${context}/borrowerMenu" class="button">Borrower</a></span>
 			<span><a href="${context}/createBillPage" class="button">Billing</a></span>
 			<span><a href="${context}/logout" class="button">Logout</a></span>
 		</div>

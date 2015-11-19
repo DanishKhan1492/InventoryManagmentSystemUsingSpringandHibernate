@@ -7,6 +7,12 @@
 		<mapping class="app.IMAS.Entities.Login"/>
 		<mapping class="app.IMAS.Entities.Product"/>
 		<mapping class="app.IMAS.Entities.Category"/>
+		<mapping class="app.IMAS.Entities.Price"/>
+		<mapping class="app.IMAS.Entities.BorrowerBill"/>
+		<mapping class="app.IMAS.Entities.BorrowerBillItems"/>
+		<mapping class="app.IMAS.Entities.Borrower"/>
+		<mapping class="app.IMAS.Entities.AmountPaid"/>
+		<mapping class="app.IMAS.Entities.AmountBorrowed"/>
 	</session-factory>
 	
 </hibernate-configuration>

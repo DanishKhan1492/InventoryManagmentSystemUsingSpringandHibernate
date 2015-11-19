@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import app.IMAS.Daos.ProductDao;
+import app.IMAS.Entities.Price;
 import app.IMAS.Entities.Product;
 
 @Repository
@@ -29,11 +30,10 @@ public class ProductDaoImpl implements ProductDao {
 		return productList;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> searchItems(String itemName) {
-		List<Product> productList=new ArrayList<>();
-		productList=(List<Product>)sessionFactory.getCurrentSession().createQuery("from Product Where Prod_Name=:name").setString("name","%"+itemName+"%").list();
+	public Product searchItems(String itemName) {
+		Product productList=new Product();
+		productList=(Product)sessionFactory.getCurrentSession().createQuery("from Product Where Prod_Name=:name").setString("name",itemName).uniqueResult();
 		return productList;
 	}
 
@@ -43,9 +43,9 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Product getItemsforupdate(int updateId) {
+	public Product getItemsforupdate(String itemName) {
 		Product product=new Product();
-		product=(Product) sessionFactory.getCurrentSession().createQuery("from Product Where Prod_Id=:id").setInteger("id", updateId).uniqueResult();
+		product=(Product) sessionFactory.getCurrentSession().createQuery("from Product Where Prod_Name=:name").setString("name", itemName).uniqueResult();
 		return product;
 	}
 
@@ -73,6 +73,32 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		
 		return itemNamesList;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> searchItemsByAnyValue(String itemName) {
+		List<Product> productList=new ArrayList<>();
+		productList=(List<Product>)sessionFactory.getCurrentSession().createQuery("from Product Where Prod_Name LIKE :name").setString("name","%"+itemName+"%").list();
+		return productList;
+	}
+
+	@Override
+	public void changePrice(Price price) {
+		sessionFactory.getCurrentSession().save(price);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Price> getSpecificPrice(String itemName) {
+		List<Price> prices=(List<Price>) sessionFactory.getCurrentSession().createQuery("from Price Where Prod_Name=:name").setString("name", itemName).list();
+		return prices;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Price> getAllPrice() {	
+		return (List<Price>) sessionFactory.getCurrentSession().createQuery("from Price").list();
 	}
 	
 }
